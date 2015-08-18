@@ -74,7 +74,7 @@ class User {
         //获取登陆次数
         $mysql->setQuery("select logcount from ims_user where username=\"$u\"");
         $log=$mysql->getOne();
-        $logcount=$log+1;
+        $logcount=$log[0]+1;
         $sql="update ims_user set current_stat=\"offline\",lastlogip=\"$ip\",logcount=\"$logcount\",lastlogin=\"$lastlogtime\" where username=\"$u\"";
         $mysql->setQuery($sql);
         $mysql->query();
