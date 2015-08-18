@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>信息系统首页</title>
+<link rel="stylesheet" href="{$templateurl}/style/admin.css"/>
+<script src="{$templateurl}/script/my.js"></script>
+<script>
+$.ready(function(){
+	var xmlhttp;
+	if(window.XMLHttpRequest){
+		xmlhttp=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	xmlhttp.open("GET","./tools/update.php?t="+Math.random(),true);
+	xmlhttp.send();
+	xmlhttp.onreadystatechange=function(){
+		if(xmlhttp.readyState==4 && xmlhttp.status==200){
+			var resulte=xmlhttp.responseText;
+			document.getElementById("latestversion").innerHTML=resulte;
+		}
+	}
+})
+	</script>
+</head>
+<body>
+<div class="time">
+	本地时间: <script>document.write($.nowtime);</script> 系统时间: {$systemtime}
+</div>
+<div class="userloginfo">
+	<img src="{$templateurl}/image/brodecast.png"/><p>您上次登陆时间为:<span>{$lastlogintime}</span>, 这是您第<span>{$logincount}</span>次登陆本系统<br/>
+	上次登陆IP: <span>{$lastloginaddr}</span>, 本次登陆IP: <span>{$loginaddr}</span><br/>
+	为了系统信息安全，请不要在网吧等公共电脑上使用自动登陆!</p>
+	<div class="close" title="关闭提示" onclick="this.parentNode.parentNode.removeChild(this.parentNode)">X</div>
+</div>
+<div class="msginfo">
+<div class="title"><span style="margin-left:10px">询盘简报</span></div>
+<table class="info">
+	<tr>
+		<td><strong style="color:#646464">昨日总询盘:</strong></td>
+		<td>{$yesterdayin}条 <a href="./msg_list.php">立即查看</a></td>
+		<td><strong style="color:#646464">今日总询盘:</strong></td><td>{$todayin}条 <a href="./msg_list.php">立即查看</a></td>
+	</tr>
+	<tr>
+		<td><strong style="color:#646464">未处理询盘:</strong></td>
+		<td>{$untreatedin}条 <a href="./msg_list.php?query=no_deal">立即查看</a></td>
+		<td><strong style="color:#646464">历史总询盘:</strong></td><td>{$totalin}条 <a href="./msg_list.php">立即查看</a></td>
+	</tr>
+</table>
+</div>
+<div class="sysinfo">
+<div class="title"><span style="margin-left:10px">系统信息</span></div>
+<table>
+	<tr><td><strong style="color:#646464">服务器系统:</strong></td><td>{$servername}</td></tr>
+	<tr><td><strong style="color:#646464">服务器IP:</strong></td><td>{$serverip}</td></tr>
+	<tr><td><strong style="color:#646464">PHP版本:</strong></td><td>{$phpversion}</td></tr>
+	<tr><td><strong style="color:#646464">Web服务器:</strong></td><td>{$webserver}</td></tr>
+	<tr><td><strong style="color:#646464">Mysql服务器:</strong></td><td>{$mysqlversion}</td></tr>
+	<tr><td><strong style="color:#646464">客户端Cookie支持:</strong></td><td>{$cookiesupport}</td></tr>
+</table>
+</div>
+<div class="sysupdate">
+<div class="title"><span style="margin-left:10px">系统版本更新</span></div>
+<table>
+<tr><td><strong style="color:#646464">系统名称:</strong></td><td>外贸询盘管理系统</td></tr>
+<tr><td><strong style="color:#646464">作者:</strong></td><td>Hito</td></tr>
+<tr><td><strong style="color:#646464">系统要求:</strong></td><td>PHP5.3+, Mysql5.4+, 推荐使用Linux+Nginx</td></tr>
+<tr><td><strong style="color:#646464">当前版本:</strong></td><td>V2.0.1</td></tr>
+<tr><td><strong style="color:#646464">最新版本:</strong></td><td id="latestversion">正在检查...</td></tr>
+<tr><td><strong style="color:#646464">系统说明:</strong></td><td><a href="./readme.txt">点击这里</a></td></tr>
+</table>
+</div>
+<div class="foot">Powered By <a href="https://www.hitoy.org/">Hito</a></div>
+</body>
+</html>

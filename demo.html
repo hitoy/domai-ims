@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+label {display:inline-block;width:120px;height:30px;line-height:30px}
+</style>
+</head>
+<body>
+<form action="./post.php" method="post">
+    <label>Name:</label><input name="name"/><br/>
+    <label>Email:</label><input name="email"/><br/>
+    <label>Tel:</label><input name="tel"/><br/>
+    <label>Product:</label><input name="product"/><br/>
+    <label>Country:</label><input name="country_name"/><br/>
+    <label>Company:</label><input name="company"/><br/>
+    <label>Team:</label><input name="team"/><br/>
+    <input type="hidden" name="url" value="这里填文章url"/>
+    <label>Message:</label><textarea name="message"></textarea>
+    <input type="submit" value="send"/>
+</form>
+</body>
+</html>

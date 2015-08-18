@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>系统左边栏菜单</title>
+<style>
+	*{margin:0;padding:0}
+	html {height:100%;}
+	body {height:100%}
+	.left_nav {float:left;margin-left:2px;width:176px;overflow:hidden;border:4px solid #abc7f7;font-family:"宋体";font-size:14px;}
+	.left_nav ul li {float:left;height:46px;width:100%;line-height:46px;text-align:center;background:url(./image/left_nav_menu_bg.png) repeat-x}
+	.left_nav ul li a {text-decoration:none;color:#000300}
+</style>
+</head>
+<body>
+<div class="left_nav">
+<ul>
+	<li><img src="./image/arrow.png"/><a href="./user_list.php" target="main">更改密码</a></li>
+	<li><img src="./image/arrow.png"/><a href="./user_do.php?action=add" target="main">添加用户</a></li>
+	<li><img src="./image/arrow.png"/><a href="./log_manage.php" target="main">日志管理</a></li>
+	<li><img src="./image/arrow.png"/><a href="./clear_cache.php" target="main">清理缓存</a></li>
+	<li><img src="./image/arrow.png"/><a href="./ip_ctrl.php" target="main">提交控制</a></li>
+	<!--<li><img src="./image/arrow.png"/><a href="#" target="main">语言管理</a></li>-->
+	<li><img src="./image/arrow.png"/><a href="./recycle.php" target="main">回收站管理</a></li>
+</ul>
+</div>	
+</body>
+</html>

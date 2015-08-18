@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>系统配置</title>
+<link rel="stylesheet" href="{$templateurl}/style/admin.css"/>
+<script src="{$templateurl}/script/my.js"></script>
+<style>
+{literal}
+.deny {width:350px;max-width:350px;height:380px;max-height:380px;margin-top:5px}
+{/literal}
+</style>
+</head>
+<body>	
+<div class="sing_count">
+		<div class="title"><span style="margin-left:10px">提交控制</span></div>
+		<div id="setting">
+			在以下列表中的IP将不能提交信息到系统当中，这项功能能够有效固定IP的恶意提交，减少垃圾留言的产生.<br/>
+			但供给者可能会利用不同IP或者伪造IP，所以请合理使用这项功能.<br/>
+				<form action="" method="POST">
+				<textarea class="deny" name="denylist">{$denylist}</textarea>
+				<button type="submit">保存</button>
+				</form>
+		</div>
+		<hr/>
+</div>
+</body>
+</html>
+

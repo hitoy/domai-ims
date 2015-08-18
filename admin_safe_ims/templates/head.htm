@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>欢迎进入 - 外贸询盘管理系统</title>
+<meta name="author" content="www.hitoy.org"/>
+<link rel="stylesheet" href="{$templateurl}/style/main.css"/>
+<script src="{$templateurl}/script/my.js"></script>
+<script>
+window.onbeforeunload=function(){
+	return value="如果您要退出系统，请点击注销按钮，不然下次系统会登陆不上!";
+}
+</script>
+</head>
+<body>
+<div class="head">
+<a href="#" onclick="window.location.reload();return false;"><img src="{$templateurl}/image/managelog.gif" alt="Logo" id="logo"/></a>
+<div class="wel">您好:{$user}, 欢迎进入外贸询盘管理系统! <a href="./exit.php" class="logout">[注销]</a></div>
+<div class="menu">
+<ul class="nav">
+<li class="selected" onclick="$.selectnav(this,'selected');window.main.location='./index_body.php';">首 页</li>
+<li onclick="$.selectnav(this,'selected');window.main.location='./sys_setting.php';">系统配置</li>
+<li onclick="$.selectnav(this,'selected');window.main.location='./msg_list.php';">信息管理</li>
+<li onclick="$.selectnav(this,'selected');window.main.location='./user_list.php';">用户管理</li>
+</ul>
+<div class="easyop" onmouseover="$.submenushow('submenu')">快捷操作</div>
+<ul class="easymenu" id="submenu" onmouseout="$.submenuhide(event,this)">
+<li><a href="./recycle.php" target="main">回收站</a></li>
+<li><a href="./user_do.php?action=add" target="main">添加用户</a></li>
+<li><a href="./msg_list.php" target="main">信息管理</a></li>
+<!--<li><a href="./sys_setting.php" target="main">登陆权限</a></li>-->
+</ul>
+</div>

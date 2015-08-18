@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>询盘管理</title>
+<link rel="stylesheet" href="{$templateurl}/style/admin.css"/>
+<script src="{$templateurl}/script/my.js"></script>
+</head>
+<body>
+<div class="user_admin">
+<div class="title"><a href="javascript:window.top.location.reload()">首页</a> > 用户管理</div>
+<table class="userinfo">
+<tr><td>ID</td><td>用户名</td><td>中文名</td><td>上次登陆时间</td><td>级别</td><td>当前状态</td><td>操作</td></tr>
+{section name=ulist loop=$userlist} 
+	<tr>
+		<td>{$userlist[ulist].id}</td>
+		<td>{$userlist[ulist].username}</td>
+		<td>{$userlist[ulist].nickname}</td>
+		<td>{$userlist[ulist].lastlogin}</td>
+		<td>{$userlist[ulist].userleve}</td>
+		<td>{$userlist[ulist].current_stat}</td>
+		<td><a href="./user_do.php?action=del&id={$userlist[ulist].id}" onclick="return confirm('您确定这样做?')">删除</a>  <a href="user_do.php?action=change&id={$userlist[ulist].id}">更改</a></td>
+	</tr>
+{/section}
+</table>
+</div>
+</body>
+</html>

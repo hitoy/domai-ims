@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>系统日志管理</title>
+<link rel="stylesheet" href="{$templateurl}/style/admin.css"/>
+<script src="{$templateurl}/script/my.js"></script>
+</head>
+<body>
+<div class="sing_count">
+<div class="title"><span style="margin-left:10px">查看系统日志</span></div>
+<div id="setting">
+	<form action="" method="post">
+	日期:<select id="sel_size" name="date">
+		{foreach from=$loglist item=d key=filename} 
+		<option value="{$filename}">{$d}</option>
+		{/foreach}
+		</select>
+		<input type="hidden" name="action"/>
+	<button type="submit" onclick="document.getElementsByName('action')[0].value='cat'">查看</button>
+	<button type="submit" onclick="return confirm('您确定这样做?');document.getElementsByName('action')[0].value='rm'">删除</button>
+	</form>
+</div>
+<hr/>
+</div>
+</body>
+</html>

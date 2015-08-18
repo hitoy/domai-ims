@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+	<head>
+		<meta charset="UTF-8">
+		<title>系统配置</title>
+		<link rel="stylesheet" href="{$templateurl}/style/admin.css"/>
+		<script src="{$templateurl}/script/my.js"></script>
+		<script>
+			function setsize(){
+				var obj=document.getElementById("sel_size");
+				$.setcookie("listsize",obj.value,315360000);
+				alert("保存成功!");
+			}
+			$.ready(function(){
+				if(document.cookie){
+					var setsize=$.getcookie("listsize");
+					var select_list=document.getElementById("sel_size").getElementsByTagName('option');
+					for(var i=0;i<select_list.length;i++){
+						if(select_list[i].value==setsize){
+							select_list[i].selected="selected";
+						}
+					}
+				}
+			})
+		</script>
+	</head>
+	<body>	
+		<div class="sing_count">
+			<div class="title"><span style="margin-left:10px">询盘展示</span></div>
+			<div id="setting">
+				在询盘列表中:每页显示<select id="sel_size"><option value="25">25条</option><option value="50">50条</option><option value="80">80条</option><option value="100">100条</option></select> 询盘
+				<button onclick="setsize()">保存</button>
+			</div>
+			<hr/>
+		</div>
+		<form action="" method="POST">
+		<div class="sing_count">
+			<div class="title"><span style="margin-left:10px">提交控制</span></div>
+			<div id="setting">
+				<select name="cfg['ipctl']">
+					{if $ipctl eq "开启"}
+					<option value="true" selected="selected">开启</option><option value="false">关闭</option>
+					{else}
+					<option value="true">开启</option><option value="false" selected="selected">关闭</option>
+					{/if}
+				</select> 指定IP不能提交信息功能
+				<button>保存</button>
+			</div>
+		</div>
+		<div class="sing_count">
+			<div class="title"><span style="margin-left:10px">提交间隔控制</span></div>
+			<div id="setting">
+				同一用户提交信息后 <input name="cfg['subctl_bycookie']" value="{$subinterval_cookie}" maxlength="5" style="width:50px"/> 秒内不能提交信息(0表示表示关闭此项功能)
+				<button>保存</button>
+			</div>
+		</div>
+		<div class="sing_count">
+			<div class="title"><span style="margin-left:10px">连续提交控制</span></div>
+			<div id="setting">
+				同一IP的用户连续提交超过 <input name="cfg['subctl_byip']" value="{$subinterval_ipaddr}" maxlength="3" style="width:50px"/> ，禁止其继续提交(0表示表示关闭此项功能,请设置为小于200的数字)
+				<button>保存</button>
+			</div>
+		</div>
+		<div class="sing_count">
+			<div class="title"><span style="margin-left:10px">多语言提示</span></div>
+			<div id="setting">
+				用户提交信息后，<select name="cfg['Mulang']">
+
+					{if $mulang eq "开启"}
+					<option value="true" selected="selected">开启</option><option value="false">关闭</option>
+					{else}
+					<option value="true">开启</option><option value="false" selected="selected">关闭</option>
+					{/if}
+
+				</select> 多语言的方式对用户提交结果进行提示
+				<button>保存</button>
+			</div>
+		</div>
+		<div class="sing_count">
+			<div class="title"><span style="margin-left:10px">缓存控制</span></div>
+			<div id="setting">
+				设置提交结果提示页面的缓存时间为:<input name="cfg['cachetime']" value="{$cachetime}" maxlength="5" style="width:50px"/> 秒(0表示表示关闭此项功能)
+				<button>保存</button>
+			</div>
+		</div>
+		</form>
+	</body>
+</html>

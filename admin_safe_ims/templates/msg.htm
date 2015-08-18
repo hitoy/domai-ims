@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>信息管理</title>
+<link rel="stylesheet" href="{$templateurl}/style/admin.css"/>
+<script src="{$templateurl}/script/my.js"></script>
+<script>
+	//ajax 处理信息
+	function deal_msg(){
+		var obj=document.getElementsByName("action");
+		var action="";
+		for(var i=0;i<obj.length;i++){
+			var actionlist=obj[i];
+			if(actionlist.checked){
+				action=actionlist.value;
+			}
+		}
+		if(action==""){
+			alert("请选择处理方式!");
+			return false;
+		}
+		var xmlhttp;
+		if(window.XMLHttpRequest){
+			xmlhttp=new XMLHttpRequest();
+		}else if(window.ActiveXObject){
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("POST","./msg.php",true);
+		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlhttp.send("action="+action+"&id={$id}");
+		xmlhttp.onreadystatechange=function(){
+			if(xmlhttp.readyState==4 && xmlhttp.status==200){
+				response=xmlhttp.responseText.match(/^[^<]+/);
+				var note=document.createElement("div");
+				note.style.position="fixed";
+				note.style.top="10px";
+				note.style.left="45%"
+				note.style.height="30px";
+				note.style.padding="0 10px";
+				note.style.lineHeight="30px";
+				note.style.background="#DFA4A4";
+				note.style.color="rgb(92, 137, 204)";
+				note.innerHTML=response;
+				document.body.appendChild(note);
+				note.style.marginLeft="-"+note.offsetWidth/2+"px";
+				setTimeout(function(){
+					document.body.removeChild(note);
+					//window.location="./msg_list.php"
+				},1500)
+			}
+		}
+		return false;
+	}
+	$.ready(function(){
+		var ipadd=document.getElementById("c_ipadd").innerHTML;
+		var show_obj=document.getElementById("checkip");
+		var xmlhttp;
+		if(window.XMLHttpRequest){
+			xmlhttp=new XMLHttpRequest();
+		}else if(window.ActiveXObject){
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("GET","./tools/checkipadd.php?ipadd="+ipadd,true);
+		xmlhttp.send();
+		xmlhttp.onreadystatechange=function(){
+			if(xmlhttp.readyState==4 && xmlhttp.status==200){
+				show_obj.innerHTML=xmlhttp.responseText;
+			}else if(xmlhttp.readyState==4 && xmlhttp.status!=200){
+				show_obj.innerHTML="自动查询失败，请手动查询!";
+			}
+		}
+	})
+</script>
+</head>
+<body style="padding-bottom:50px">
+<div class="msg_admin">
+<div class="title"><a href="javascript:window.top.location.reload()">首页</a> &gt; <a href="./msg_list.php">信息管理</a></div>
+<table class="msgbox">
+	<tr>
+		<td>客户姓名</td><td>{$name}</td>
+		<td>提交时间</td><td>{$subtime}</td>
+	</tr>
+	<tr>
+		<td>国家(用户填写)</td><td>{$country}</td>
+		<td>来源</td><td>{$url}</td>
+	</tr>
+	<tr>
+		<td>客户邮箱</td><td>{$email}</td>
+		<td>真实来源</td><td>{$referer}</td>
+	</tr>
+	<tr>
+		<td>客户电话</td><td>{$tel}</td>
+		<td>客户IP</td><td><a href="http://www.baidu.com/s?wd={$ip}" target="_blank" title="点击手动查询" id="c_ipadd">{$ip}</a><span id="checkip">正在自动查询IP归属地...</span></td>
+	</tr>
+	<tr>
+		<td>需求产品</td><td>{$product}</td>
+		<td>语种</td><td>{$lang}</td>
+	</tr>
+	<tr>
+		<td>公司</td><td>{$company}</td>
+		<td>询盘状态</td><td>{$status}</td>
+	</tr>
+	<tr>
+		<td>分组</td><td style="color:red">{$team}</td>
+		<td>处理人及时间:</td><td>{$deal_person} : {$deal_time}</td>
+	</tr>
+	<tr class="mainbox">
+		<td style="padding-left:10px">消息内容</td>
+		<td colspan="3"><textarea>{$message}</textarea></td>
+	</tr>
+	<form action="" method="POST" onsubmit="return deal_msg()">
+	<tr>
+		<td>是否处理</td><td colspan="3">
+		<input type="radio" name="action" value="right"/>有效 
+		<input type="radio" name="action" value="wrong"/>无效 
+		<input type="radio" name="action" value="repeat"/>重复 
+		{if $ulv eq 1}<input type="radio" name="action" value="del"/>删除{/if}
+		<input type="hidden" name="id" value="{$id}"/>
+		<input type="submit" value="确认处理" class="btn"/>
+		<a href="javascript:window.location='./msg_list.php';" class="goback">返回上一页</a></td>
+	</tr>
+	<tr>
+		<td colspan="4">
+			<a href="./msg.php?id={$id+1}" class="next_article">上一篇</a>
+			<a href="./msg.php?id={$id-1}" class="next_article">下一篇</a></td>
+	</tr>
+</form>
+</table>
+</div>
+</body>
+</html>

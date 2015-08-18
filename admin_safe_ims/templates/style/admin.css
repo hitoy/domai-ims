@@ -1,0 +1,115 @@
+/*Css Rest*/
+* {margin:0;padding:0;}
+html,body{font-size:12px;font-family:"宋体",Arial,Verdana;background:#ffffff}
+img {border:none}
+a {text-decoration:none;}
+ul {list-style:none}
+/*time*/
+.time {width:90%;margin-top:10px;margin-left:20px}
+/*index body*/
+.userloginfo {margin-top:10px;width:90%;padding:15px 10px;color:#303030;background:#fffced;border:1px solid #ffdba0;border-radius:5px;position:relative}
+.userloginfo img {float:left}
+.userloginfo p {margin-left:30px;line-height:20px;}
+.userloginfo span {color:#3464ba;text-decoration:underline}
+.userloginfo .close {position:absolute;right:4px;top:4px;cursor:pointer;color:red;font-weight:bold;float:right;margin:0px 5px;font-size:14px;}
+/*Message brief*/
+.msginfo {width:90%;margin-top:10px;;border:1px solid #cedef8}
+.title {color:#343435;width:100%;height:25px;line-height:25px;background:#e4f0fb;font-size:14px;font-weight:bold;border-bottom:1px solid #cedef8}
+.msginfo .info {margin-left:25px;color:#323232;width:90%;}
+.msginfo .info tr {height:30px;width:100%;}
+.msginfo .info tr td {width:20%;}
+/*system info*/
+.sysinfo {width:44%;float:left;margin-top:10px;border:1px solid #cedef8}
+.sysinfo table {margin-left:25px;width:90%;line-height:30px}
+.sysinfo table tr {height:30px;width:100%;}
+.sysinfo table tr td{width:20%;}
+/*system update*/
+.sysupdate {width:44%;float:left;margin-left:2%;margin-top:10px;border:1px solid #cedef8}
+.sysupdate table {margin-left:25px;width:90%;line-height:30px}
+.sysupdate table tr {height:30px;width:100%;}
+.sysupdate table tr td{width:20%;}
+/**foot**/
+.foot {width:80%;height:20px;clear:both;margin:20px auto;padding-top:50px;text-align:center}
+/**系统设置页面**/
+.sing_count {width:90%;margin-top:10px;}
+.sing_count #setting {margin:30px 50px;}
+.sing_count #setting button {background:#2e89c5;background:-webkit-linear-gradient(top,#2a96d8 0%,#257db9 90%,#2e89c5 100%);border:1px solid #1d567d;color:#fff;height:22px;width:50px;border-radius:5px;cursor:pointer;margin-left:20px}
+.ipcontrl {width:90%;margin-top:10px;}
+.ipcontrl p {margin:20px;}
+.ipcontrl form {width:500px;height:300px;margin-left:20px}
+.ipcontrl form textarea{width:400px;max-width:400px;height:300px;max-height:300px;overflow:auto;outline:none}
+.ipcontrl form input {background:#2e89c5;background:-webkit-linear-gradient(top,#2a96d8 0%,#257db9 90%,#2e89c5 100%);border:1px solid #1d567d;color:#fff;height:22px;width:50px;border-radius:5px;margin:10px auto auto 10px;cursor:pointer}
+/**用户管理**/
+.user_admin {width:90%;margin-top:10px}
+.user_admin .title {color:#0056b5;font-size:12px;font-weight:normal;width:99%;padding-left:1%}
+.user_admin a{color:#0056b5}
+.user_admin a:hover{text-decoration:underline}
+.user_admin table.userinfo {width:90%;margin-top:20px;border-collapse:collapse;color:#000;}
+.user_admin table.userinfo td {border:1px solid #cbe0f3;text-align:center;padding:5px 10px}
+.user_admin table.userinfo tr:nth-child(1) {height:30px;line-height:30px;background:#e4f0fb;text-align:center}
+.user_admin table.user_mod {width:600px;;border-collapse:collapse;margin-top:10px;}
+.user_admin table.user_mod td {border:1px solid #cbe0f3;height:40px;text-align:center}
+.user_admin table.user_mod tr:nth-child(odd) {background:#f1f7fd}
+.user_admin table.user_mod  input {width:200px;height:20px;line-height:20px}
+.user_admin table.user_mod .butn {width:75px;height:28px;background:url(../image/submit.png) no-repeat;border:none;cursor:pointer;margin-left:20px;outline:none}
+.user_admin table.user_mod select {width:200px;height:20px;line-height:20px}
+/**信息管理**/
+.msg_admin {width:90%;margin-top:10px;}
+.msg_admin .title {color:#0056b5;font-size:12px;font-weight:normal;width:99%;padding-left:1%}
+.msg_admin a{color:#0056b5}
+.msg_admin a:hover{text-decoration:underline}
+.msg_admin table.msg_list {width:100%;margin-top:20px;border-collapse:collapse;color:#000;table-layout:fixed}
+.msg_admin table.msg_list td {border:1px solid #cbe0f3;padding:5px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.msg_admin table.msg_list tr:nth-child(1) {height:50px;text-align:center;background:#e4f1fa;}
+.msg_admin table.msg_list tr.message_list {cursor:pointer}
+.msg_admin table.msg_list td:nth-child(1) {width:50px;text-align:center;padding:0}
+.msg_admin table.msg_list td:nth-child(2) {width:50px;text-align:center;padding:0}
+.msg_admin table.msg_list td:nth-child(3) {width:100px;padding:0;padding-left:5px}
+.msg_admin table.msg_list td:nth-child(4) {width:150px;padding:0;padding-left:5px}
+.msg_admin table.msg_list td:nth-child(5) {width:80px;text-align:center;padding:0;padding-left:5px}
+.msg_admin table.msg_list td:nth-last-child(2) {width:60px;text-align:center}
+.msg_admin table.msg_list td:nth-last-child(1) {width:60px;text-align:center}
+.msg_admin table.msg_list td a {margin-left:5px}
+.msg_admin table.msg_list tr:nth-child(odd) {background:#eff5fb}
+.msg_admin table.msg_list td.deal {background:#c9cecb;text-align:left;padding-top:3px;padding-bottom:5px;}
+.msg_admin table.msg_list td.deal button {border:1px solid #888;color:#000;background:#ebebeb;border-radius:3px;padding:3px 6px;margin-left:15px;cursor:pointer}
+.msg_admin table.msg_list td.deal #page {float:right;margin-right:10px;}
+.msg_admin table.msg_list td.selectbar {text-align:left;padding:5px 20px}
+.msg_admin table.msg_list .no_process {color:red;}
+.msg_admin .query {width:99%;height:28px;line-height:28px;border:1px solid #cbe0f3;margin:10px auto;text-align:right;}
+.msg_admin .query select {width:120px;}
+.msg_admin .query input {width:90px;height:20px;border:1px solid #f8c544;background:#fce3a3;cursor:pointer;margin-right:20px}
+/**消息管理内页**/
+.msg_admin table.msgbox {width:100%;margin-top:20px;border-collapse:collapse;color:#000;table-layout:fixed}
+.msg_admin table.msgbox tr {width:100%;}
+.msg_admin table.msgbox td {border:1px solid #cbe0f3;height::40px;line-height:40px;padding-left:10px}
+.msg_admin table.msgbox tr td:nth-child(1) {width:100px}
+.msg_admin table.msgbox tr td:nth-child(3) {width:100px}
+.msg_admin table.msgbox tr:nth-child(odd) {background:#f1f7fd}
+.msg_admin table.msgbox tr.mainbox td{height:200px;padding:0}
+.msg_admin table.msgbox tr.mainbox  textarea {width:99%;height:90%;margin-top:10px;margin-left:10px;border:none;outline:none}
+.msg_admin table.msgbox tr input {margin-left:10px}
+.msg_admin table.msgbox tr .btn {width:75px;height:29px;background:url(../image/msg_process.png) no-repeat;border:none;cursor:pointer;margin-left:30%}
+.msg_admin table.msgbox tr .goback{float:right;margin-right:50px}
+.msg_admin table.msgbox tr #checkip {margin-left:20px}
+.msg_admin table.msgbox .next_article {float:right;margin-right:50px}
+/**回收站管理**/
+.recycle_admin {width:90%;margin-top:10px;}
+.recycle_admin .title {color:#0056b5;font-size:12px;font-weight:normal;width:99%;padding-left:1%}
+.recycle_admin a{color:#0056b5}
+.recycle_admin a:hover{text-decoration:underline}
+.recycle_admin table.recyle {width:100%;margin-top:20px;border-collapse:collapse;color:#000;table-layout:fixed}
+.recycle_admin table.recyle td {border:1px solid #cbe0f3;padding:5px;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+.recycle_admin table.recyle tr:nth-child(1) {height:50px;text-align:center;background:#e4f1fa;}
+.recycle_admin table.recyle td:nth-child(1) {width:50px;text-align:center;padding:0}
+.recycle_admin table.recyle td:nth-last-child(1) {width:120px;text-align:center}
+.recycle_admin table.recyle td a {margin-left:5px}
+.recycle_admin table.recyle tr:nth-child(odd) {background:#eff5fb}
+.recycle_admin table.recyle td.deal {background:#c9cecb;text-align:left;padding-top:3px;padding-bottom:5px;}
+.recycle_admin table.recyle td.deal button {border:1px solid #888;color:#000;background:#ebebeb;border-radius:3px;padding:3px 6px;margin-left:15px;cursor:pointer}
+.recycle_admin table.recyle td.deal #page {float:right;margin-right:10px;}
+.recycle_admin table.recyle td.selectbar {text-align:left;padding:5px 20px}
+
+
+
+

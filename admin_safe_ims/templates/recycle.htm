@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn">
+<head>
+<meta charset="UTF-8">
+<title>回收站管理</title>
+<link rel="stylesheet" href="{$templateurl}/style/admin.css"/>
+<script src="{$templateurl}/script/my.js"></script>
+<script>
+var i=0;
+function selectall(){
+	var obj=document.getElementsByTagName("table")[0].getElementsByTagName('input');
+	if(i%2==0){
+		for(var j=1;j<obj.length;j++){
+			obj[j].checked="checked";
+		}
+	}else{
+		for(var j=1;j<obj.length;j++){
+			obj[j].checked="";
+		}
+	}
+	i++;
+}
+function selectno(){
+	var obj=document.getElementsByTagName("table")[0].getElementsByTagName('input');
+	for(var j=1;j<obj.length;j++){
+		if(obj[j].checked){
+			obj[j].checked=false;
+		}else{
+			obj[j].checked="checked";
+		}
+	}
+}
+//ajax 处理信息
+function deal_msg(action){
+	var obj=document.getElementsByTagName("table")[0].getElementsByTagName('input');
+	var msg_list=new Array();
+	var i=0;
+	for(var j=1;j<obj.length;j++){
+		if(obj[j].checked){
+			msg_list[i]=obj[j].value;
+			i++;
+		}
+	}
+	if(msg_list==""){
+		alert("请选择!");
+		return false;
+	}
+	var xmlhttp;
+	if(window.XMLHttpRequest){
+		xmlhttp=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+		xmlhttp.open("POST","./recycle.php",true);
+		xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		xmlhttp.send("action="+action+"&id="+msg_list);
+		xmlhttp.onreadystatechange=function(){
+			if(xmlhttp.readyState==4 && xmlhttp.status==200){
+				window.location.reload();
+		}
+	}
+}
+</script>
+</head>
+<body style="padding-bottom:50px;">
+<div class="msg_admin">
+<div class="title"><a href="javascript:window.top.location.reload()">首页</a> &gt; 回收站</div>
+<table class="msg_list">
+<tr><td><input type="checkbox" value="0" onclick="selectall()"/></td><td>ID</td><td>客户姓名</td><td>客户邮箱</td><td>国家</td><td>产品</td><td>提交时间</td><td>分组</td><td>处理人</td></tr>
+
+{section name=list loop=$msg_list} 
+<tr>
+	<td><input type="checkbox" value="{$msg_list[list].id}"/></td>
+	<td>{$msg_list[list].id}</td>
+	<td>{$msg_list[list].name}</td>
+	<td>{$msg_list[list].email}</td>
+	<td>{$msg_list[list].country}</td>
+	<td>{$msg_list[list].product}</td>
+	<td>{$msg_list[list].subtime}</td>
+	<td>{$msg_list[list].team}</td>
+	<td>{$msg_list[list].deal_person}</td>
+</tr>
+{/section}
+
+<tr>
+	<td colspan="9" class="selectbar">选择:<a href="javascript:selectall();">全选</a><a href="javascript:selectno();">反选</a>
+</tr>
+<tr>
+	<td colspan="9" class="deal">
+	<button onclick="deal_msg('del');return false;">彻底删除</button>
+	<button onclick="deal_msg('restore');return false;">恢复</button>
+<div id="page">
+	{$pageinfo}
+</div></td>
+</tr>
+</table>
+<div>
+</body>
+</html>
