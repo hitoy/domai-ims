@@ -54,6 +54,7 @@ function trim(str){
 </script>
 </head>
 <body>
+<noscript><center><h1>您的系统不支持javascript，请开启javascript后再进行安装!</h1></center></noscript>
 <form action="?step=2" method="post" id="datadetail" onsubmit="return checksub()" name="datadetail">
 <table>
 <tr><td colspan="2">欢迎使用询盘信息管理系统!<br/><br/>您的浏览器必须支持JS才能完成安装:</td></td></tr>

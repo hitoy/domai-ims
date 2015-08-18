@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.16, created on 2015-08-17 03:25:17
+<?php /* Smarty version Smarty-3.1.16, created on 2015-08-18 02:36:28
          compiled from ".\templates\head.htm" */ ?>
 <?php /*%%SmartyHeaderCode:2357455d144f5c209f8-61393176%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'cb3561945c4a0adffdf05851e6db3c3a29de9dbb' => 
     array (
       0 => '.\\templates\\head.htm',
-      1 => 1439781698,
+      1 => 1439865315,
       2 => 'file',
     ),
   ),
@@ -28,7 +28,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
 <html lang="zh-cn">
 <head>
 <meta charset="UTF-8">
-<title>欢迎进入 - 外贸询盘管理系统</title>
+<title>哆麦外贸询盘管理系统</title>
 <meta name="author" content="www.hitoy.org"/>
 <link rel="stylesheet" href="<?php echo $_smarty_tpl->tpl_vars['templateurl']->value;?>
 /style/main.css"/>
@@ -45,7 +45,7 @@ window.onbeforeunload=function(){
 <a href="#" onclick="window.location.reload();return false;"><img src="<?php echo $_smarty_tpl->tpl_vars['templateurl']->value;?>
 /image/managelog.gif" alt="Logo" id="logo"/></a>
 <div class="wel">您好:<?php echo $_smarty_tpl->tpl_vars['user']->value;?>
-, 欢迎进入外贸询盘管理系统! <a href="./exit.php" class="logout">[注销]</a></div>
+, 欢迎进入哆麦外贸询盘管理系统! <a href="./exit.php" class="logout">[注销]</a></div>
 <div class="menu">
 <ul class="nav">
 <li class="selected" onclick="$.selectnav(this,'selected');window.main.location='./index_body.php';">首 页</li>

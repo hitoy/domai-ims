@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.16, created on 2015-08-17 03:28:06
+<?php /* Smarty version Smarty-3.1.16, created on 2015-08-18 02:45:28
          compiled from ".\templates\index_body.htm" */ ?>
 <?php /*%%SmartyHeaderCode:110555d14758d136a9-51298255%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     '512484af958eec2b3d0c404dec867c9d73999b6a' => 
     array (
       0 => '.\\templates\\index_body.htm',
-      1 => 1439782082,
+      1 => 1439865891,
       2 => 'file',
     ),
   ),
@@ -121,15 +121,15 @@ $.ready(function(){
 <div class="sysupdate">
 <div class="title"><span style="margin-left:10px">系统版本更新</span></div>
 <table>
-<tr><td><strong style="color:#646464">系统名称:</strong></td><td>外贸询盘管理系统</td></tr>
-<tr><td><strong style="color:#646464">作者:</strong></td><td>Hito</td></tr>
-<tr><td><strong style="color:#646464">系统要求:</strong></td><td>PHP5.3+, Mysql5.4+, 推荐使用Linux+Nginx</td></tr>
-<tr><td><strong style="color:#646464">当前版本:</strong></td><td>V2.0.1</td></tr>
+<tr><td><strong style="color:#646464">系统名称:</strong></td><td>哆麦外贸询盘管理系统</td></tr>
+<tr><td><strong style="color:#646464">许可协议:</strong></td><td>MIT</td></tr>
+<tr><td><strong style="color:#646464">系统要求:</strong></td><td>PHP5.0+, Mysql5.0+, 推荐使用Linux+Nginx</td></tr>
+<tr><td><strong style="color:#646464">当前版本:</strong></td><td>V2.1.0</td></tr>
 <tr><td><strong style="color:#646464">最新版本:</strong></td><td id="latestversion">正在检查...</td></tr>
-<tr><td><strong style="color:#646464">系统说明:</strong></td><td><a href="./readme.txt">点击这里</a></td></tr>
+<tr><td><strong style="color:#646464">系统说明:</strong></td><td><a href="../readme.md">点击这里</a></td></tr>
 </table>
 </div>
-<div class="foot">Powered By <a href="https://www.hitoy.org/">Hito</a></div>
+<div class="foot">Copyright &copy; 2015 Hito</div>
 </body>
 </html>
 <?php }} ?>
