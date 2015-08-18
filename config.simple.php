@@ -14,11 +14,11 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 //数据库配置
-$cfg["dbhost"]="localhost";
-$cfg["dbuser"]="root";
+$cfg["dbhost"]="";
+$cfg["dbuser"]="";
 $cfg["dbpassword"]="";
-$cfg["dbname"]="message";
-$cfg["prefix"]="ims_";
+$cfg["dbname"]="";
+$cfg["prefix"]="";
 $cfg["lang"]="utf8";
 
 /*****************************************
