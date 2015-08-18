@@ -138,7 +138,7 @@ showui($errorcode);
 
 //当检查到错误代码出现时，直接程序直接跳转到这里
 //执行结果展示
-//PHP5.3以上版本
+//PHP5.2以上版本
 function showui($errorcode){
     $cachefile=MSGROOT."caches/caches_".$lang."_".$errorcode.".html";//缓存文件的存放地址
     global $userlang,$timer,$sysconf;
