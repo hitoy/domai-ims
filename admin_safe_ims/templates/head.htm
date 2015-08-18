@@ -8,7 +8,7 @@
 <link rel="icon" href="{$templateurl}/image/favicon.ico" />
 <script src="{$templateurl}/script/my.js"></script>
 <script>
-window.onbeforeunload=function(){
+window.onclose=function(){
     new Image().src="./exit.php";
 	//return value="如果您要退出系统，请点击注销按钮，不然下次系统会登陆不上!";
 }
