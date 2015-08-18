@@ -22,7 +22,7 @@ table td{border:1px solid #ccc;text-align:center;padding:4px 2px}
 <td>检测项目</td><td>系统要求</td><td>实际配置</td>
 </tr>
 <tr>
-<td>PHP版本</td><td>5.3</td><td><?php echo phpversion();?></td>
+<td>PHP版本</td><td>5.0</td><td><?php echo phpversion();?></td>
 </tr>
 <tr>
 <td colspan="3">目录权限检测</td>
