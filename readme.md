@@ -52,4 +52,4 @@
 * 在软件和软件的所有副本中都必须包含版权声明和本许可声明。
 
 ##版权声明
-copyright 2015 杨海涛(vip@hitoy.org) 所有权利保留
+copyright 2015 Hito(https://www.hitoy.org/)
