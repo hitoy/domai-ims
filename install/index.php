@@ -4,7 +4,8 @@
  * 杨海涛 2014年1月8日
  * *******************************/
 error_reporting(E_ALL);
-if(file_exists(".\install.lock")){
+header("Content-Type:text/html;charset=utf-8");
+if(file_exists("./install.lock")){
 	echo "系统已经安装，如需重新安装系统，请删除install目录下的install.lock文件";
 	exit();
 }
