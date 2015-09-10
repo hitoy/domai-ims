@@ -47,7 +47,7 @@ $loginaddr=$_SERVER["REMOTE_ADDR"];
 //昨日总询盘
 $mysql->setQuery("select count(id) from ims_message where TO_DAYS(NOW())-TO_DAYS(subtime)=1 and msg_status!=9");
 $dayin=$mysql->getOne();
-$yesterdayin=$adyin[0];
+$yesterdayin=$dayin[0];
 
 //今日总询盘
 $mysql->setQuery("select count(id) from ims_message where date(subtime)=date(now()) and msg_status!=9");
