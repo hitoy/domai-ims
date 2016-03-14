@@ -109,7 +109,6 @@ ul {list-style:none}
 .recycle_admin table.recyle td.deal button {border:1px solid #888;color:#000;background:#ebebeb;border-radius:3px;padding:3px 6px;margin-left:15px;cursor:pointer}
 .recycle_admin table.recyle td.deal #page {float:right;margin-right:10px;}
 .recycle_admin table.recyle td.selectbar {text-align:left;padding:5px 20px}
-
-
-
-
+/**内容导出**/
+#setting form.export input {height:25px;line-height:25px;}
+#setting form.export input#submit {width:120px;margin-left:20px;cursor:pointer}
