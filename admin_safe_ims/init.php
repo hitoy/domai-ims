@@ -26,6 +26,8 @@ define("ADMINROOT",str_replace("\\","/",dirname(__FILE__))."/");
 define("MSGROOT",dirname(ADMINROOT)."/");
 //网站模板uri
 define("TEMPLATEURL",dirname($_SERVER["PHP_SELF"])."/");
+//定义session存放目录
+session_save_path(ADMINROOT."session");
 
 //判断用户是否登陆
 session_start();
