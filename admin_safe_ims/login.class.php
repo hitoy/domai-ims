@@ -26,18 +26,18 @@ class User {
     public function checkUser($u,$p){
         global $mysql;//实例化的mysql对象
         $p=sha1($p);
-        $sql="select current_stat,userleve from ims_user where username=\"$u\" and password=\"$p\"";
+        $sql="select current_stat,userleve,sessionid from ims_user where username=\"$u\" and password=\"$p\"";
         $mysql->setQuery($sql);
         if(!$result=$mysql->getOne()){
             $this->logerrormsg="用户名或密码错误!";
             return false;
-        }else if($result[0]=='online'){
-            $this->logerrormsg="当前用户已经登陆!";
-            return false;
-        }else if($result[0]=='offline'){
+        }else{
+            //保存当前用户
             $this->username=$u;
             $this->password=$p;
             $this->userleve=$result[1];
+            /*踢出已经登陆的其它用户*/
+            unlink(ADMINROOT."session/sess_".$result[2]);
             return true;
         }
     }
@@ -46,8 +46,8 @@ class User {
         global $mysql;
         $_SESSION["uname"]=$this->username;
         $_SESSION["ulv"]=$this->userleve;
-        //更新当前用户在线状态
-        $sql="update ims_user set current_stat=\"online\" where username=\"$this->username\"";
+        //更新当前用户在线状态，并写入session
+        $sql="update ims_user set current_stat=\"online\",sessionid = \"".session_id()."\" where username=\"$this->username\"";
         $mysql->setQuery($sql);
         $mysql->query();
         //获取登陆时间并保存为session以便系统退出时保存上次登陆时间

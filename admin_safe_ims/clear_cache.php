@@ -11,13 +11,16 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
-	
-	$cachedir=opendir("../caches/") or exit("失败，缓存目录不存在或不可度!");
-	while($file=readdir($cachedir)){
-		if($file=="."||$file=="..") continue;
-			echo unlink("../caches/".$file)?"清除".$file."成功!<br/>":"清除".$file."失败!<br/>";
-	}
-	echo "完成!";
-	//echo "<script>setTimeout(function(){window.history.go(-1);},1000)</script>";
-?>
+ */
+session_start();
+$cachedir=opendir("../caches/") or exit("失败，缓存目录不存在或不可读取!");
+while($file=readdir($cachedir)){
+    if($file=="."||$file=="..") continue;
+    echo unlink("../caches/".$file)?"清除".$file."成功!<br/>":"清除".$file."失败!<br/>";
+}
+$cachedir=opendir("./session/") or exit("失败，缓存目录不存在或不可读取");
+while($file=readdir($cachedir)){
+    if($file=="."||$file==".."||$file=="sess_".session_id()) continue;
+    echo unlink("./session/".$file)?"清除".$file."成功!<br/>":"清除".$file."失败!<br/>";
+}
+echo "完成!";

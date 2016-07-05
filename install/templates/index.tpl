@@ -46,6 +46,9 @@ table td{border:1px solid #ccc;text-align:center;padding:4px 2px}
 <td>admin_safe_ims/</td><td>读取+写入</td><td><?php echo getmod("admin_safe_ims/");?></td>
 </tr>
 <tr>
+<td>admin_safe_ims/session</td><td>读取+写入</td><td><?php echo getmod("admin_safe_ims/session/");?></td>
+</tr>
+<tr>
 <td>admin_safe_ims/logs</td><td>读取+写入</td><td><?php echo getmod("admin_safe_ims/logs/");?></td>
 </tr>
 </table>

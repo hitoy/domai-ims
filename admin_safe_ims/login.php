@@ -48,4 +48,3 @@ if($_POST){
 	$smarty->assign("errormsg",$errormsg);
 	$smarty->display("login.htm");
 }
-?>

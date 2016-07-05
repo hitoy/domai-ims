@@ -33,5 +33,6 @@ Create table ims_user(
 	lastlogin DATETIME default "1988-04-25 00:00:00",
 	lastlogip char(50) not null default "0.0.0.0",
 	logcount int not null default 1,
+    sessionid char(100) default "",
 	PRIMARY KEY(id)
 )engine=myisam DEFAULT CHARSET=utf8;
