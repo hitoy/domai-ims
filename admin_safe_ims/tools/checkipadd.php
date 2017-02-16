@@ -1,20 +1,25 @@
 ﻿<?php
-/*根据IP地址查询归属地，使用IP138地址库
- *杨海涛 2013年12月4日
+/*根据IP地址查询归属地，使用淘宝和新浪地址库
+ *杨海涛 2017年2月16日
  */
+error_reporting(0);
 function get_ip_add($ip){
-	$ip_rep="/\d+\.\d+\.\d+\.\d+/";
-	if(!preg_match($ip_rep,$ip)){exit("查询失败,输入IP非法!");}
-	$ipfile=file_get_contents("http://www.ip138.com/ips138.asp?ip=".$ip);
-	$ipfile=iconv("gb2312","utf-8",$ipfile);
-	$file_rep="/<ul\sclass=\"ul1\"><li>[^<\/]+/";
-	preg_match($file_rep,$ipfile,$resulte);
-	if(preg_match("/\：[\s\S]+/",$resulte[0],$ipadd)){
-		return $ipadd[0];
-	}else{
-		return "查询失败，请手动查询!";
-	}
+    #淘宝
+	$ipfile=file_get_contents("http://ip.taobao.com/service/getIpInfo.php?ip=".$ip);
+    $areaobj = json_decode($ipfile);
+    if(!empty($areaobj->data))
+        return $areaobj->data->country." ".$areaobj->data->region." ".$areaobj->data->city;
+    #新浪
+	$ipfile=file_get_contents("http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=json&ip=".$ip);
+    $areaobj = json_decode($ipfile);
+    if(!empty($areaobj->ret))
+        return $areaobj->country." ".$areaobj->province." ".$areaobj->city;
+    #聚合
+	$ipfile=file_get_contents("http://apis.juhe.cn/ip/ip2addr?ip=".$ip."&key=63a5fa03317127df6fd204272c129636&dtype=json");
+    $areaobj = json_decode($ipfile);
+    if($areaobj->resultcode == '200')
+        return $areaobj->result->area;
+    return "查询失败! 请手动查询";
 }
 $ip=$_GET["ipadd"];
 echo get_ip_add($ip);
-?>
