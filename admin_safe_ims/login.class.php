@@ -37,7 +37,9 @@ class User {
             $this->password=$p;
             $this->userleve=$result[1];
             /*踢出已经登陆的其它用户*/
-            unlink(ADMINROOT."session/sess_".$result[2]);
+            if($result[2]!==session_id()){
+                unlink(ADMINROOT."session/sess_".$result[2]);
+            }
             return true;
         }
     }
