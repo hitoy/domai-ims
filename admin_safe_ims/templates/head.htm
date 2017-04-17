@@ -17,7 +17,7 @@ $.ready(function(){
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
     setInterval(function(){
-        xmlhttp.open("GET","./notification.php?ignore="+localStorage.getItem('ignore')+"&t="+Math.random(),true);
+        xmlhttp.open("GET","./notification.php?ignore="+(localStorage.getItem('ignore')||"0")+"&t="+Math.random(),true);
         xmlhttp.send();
         xmlhttp.onreadystatechange=function(){
             if(xmlhttp.readyState==4 && xmlhttp.status==200){
@@ -32,11 +32,11 @@ $.ready(function(){
                             ignore.push(id);
                             localStorage.setItem('ignore',ignore);
                     }
-                    $.notification("有新的客户询盘，请注意!","客户姓名:"+name+" 电话:"+tel+" 需求产品:"+product,5000,function(){});
+                    $.notification("有新的客户询盘，请注意!","客户姓名:"+name+" 电话:"+tel+" 需求产品:"+product,300000,function(){});
                 }
             }
         }        
-    },1000);
+    },2000);
         
 });
 </script>
