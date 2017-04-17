@@ -6,12 +6,39 @@
 <meta name="author" content="www.hitoy.org"/>
 <link rel="stylesheet" href="{$templateurl}/style/main.css"/>
 <link rel="icon" href="{$templateurl}/image/favicon.ico" />
-<script src="{$templateurl}/script/my.js"></script>
+<script src="{$templateurl}script/my.js"></script>
 <script>
-window.onclose=function(){
-    new Image().src="./exit.php";
-	//return value="如果您要退出系统，请点击注销按钮，不然下次系统会登陆不上!";
-}
+//系统通知
+$.ready(function(){
+    var xmlhttp;
+	if(window.XMLHttpRequest){
+		xmlhttp=new XMLHttpRequest();
+	}else if(window.ActiveXObject){
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+    setInterval(function(){
+        xmlhttp.open("GET","./notification.php?ignore="+localStorage.getItem('ignore')+"&t="+Math.random(),true);
+        xmlhttp.send();
+        xmlhttp.onreadystatechange=function(){
+            if(xmlhttp.readyState==4 && xmlhttp.status==200){
+                var resulte=eval(xmlhttp.responseText);
+                for(var i in resulte){
+                    var id  = resulte[i].id;
+                    var name = resulte[i].name;
+                    var tel = resulte[i].tel||'未知';
+                    var product = resulte[i].product||'未知';
+                    var ignore = (localStorage.getItem('ignore')||'0').split(',');
+                    if(!(id in ignore)){
+                            ignore.push(id);
+                            localStorage.setItem('ignore',ignore);
+                    }
+                    $.notification("有新的客户询盘，请注意!","客户姓名:"+name+" 电话:"+tel+" 需求产品:"+product,5000,function(){});
+                }
+            }
+        }        
+    },1000);
+        
+});
 </script>
 </head>
 <body>

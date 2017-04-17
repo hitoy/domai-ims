@@ -17,6 +17,22 @@ var $=myquery=(function(){
 			})
 		}
 	}
+
+    var notification=function(title,content,closetime,closecallback){
+        if(!window.Notification){alert('您的系统不支持实时通知!');return false}
+        Notification.requestPermission(function(permission){
+            var config={
+                body:content,
+                icon:'./templates/image/notification.png',
+                dir:'auto'
+            }
+            thisnotification=new Notification(title,config);
+            thisnotification.onclose=closecallback;
+            setTimeout(function(){
+                thisnotification.close();
+            },closetime);
+        })
+    }
 	//显示子菜单
 	var submenushow=function(id){
 		var obj=document.getElementById(id);
@@ -128,6 +144,7 @@ var $=myquery=(function(){
 			nowtime:nowtime,
 			setcookie:setcookie,
 			getcookie:getcookie,
-			getpasswd:getpasswd
+			getpasswd:getpasswd,
+            notification:notification
 	}
 })()
