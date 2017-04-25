@@ -27,17 +27,12 @@ $.ready(function(){
                     var name = resulte[i].name;
                     var tel = resulte[i].tel||'未知';
                     var product = resulte[i].product||'未知';
-                    var ignore = (localStorage.getItem('ignore')||'0').split(',');
-                    if(!(id in ignore)){
-                            ignore.push(id);
-                            localStorage.setItem('ignore',ignore);
-                    }
+                    localStorage.setItem('ignore',id);
                     $.notification("有新的客户询盘，请注意!","客户姓名:"+name+" 电话:"+tel+" 需求产品:"+product,300000,function(){});
                 }
             }
-        }        
+        }
     },2000);
-        
 });
 </script>
 </head>
