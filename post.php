@@ -12,7 +12,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
+ */
 
 
 //如果没有提交请求，则退出执行
@@ -46,6 +46,8 @@ if($sysconf->Mulang){
     $lang="en";
 }
 $userlang=new Language($lang);
+//获取客户端要求的返回对象
+$responsemimetype = isset($_GET['format'])?$_GET['format']:(isset($_POST['format'])?$_POST['format']:"html");
 
 //下面的留言的公有信息，其它类会用到，所以把它们放到前面
 $team=(empty($_POST["team"]))?"郑州":$_POST["team"];   //信息分组
@@ -62,7 +64,7 @@ if($sysconf->ipctl){
         //如果当前用户IP被管理员禁止，则错误代码为1;
         $errorcode=1;
         //goto view;
-        showui($errorcode);
+        showui($errorcode,$responsemimetype);
         exit();
     }
 }
@@ -76,7 +78,7 @@ if($sysconf->subctl_byip>0){
     if($msg_ins->getsubcount()>$sysconf->subctl_byip){
         //如果当前提交IP超过系统限制，则错误代码为2;
         $errorcode=2;
-        showui($errorcode);
+        showui($errorcode,$responsemimetype);
         //goto view;
         exit();
     }
@@ -88,7 +90,7 @@ if($sysconf->subctl_bycookie>0){
     if($msg_ins->getsubinterval()<$sysconf->subctl_bycookie){
         //如果两次提交间隔小于系统设置，则错误代码为3;
         $errorcode=3;
-        showui($errorcode);
+        showui($errorcode,$responsemimetype);
         //goto view;
         exit();
     }
@@ -116,7 +118,7 @@ $sql=$msg_ins->getsql();
 //如果$sql为整数，则用户输入出现错误,否则，则提交数据库
 if(gettype($sql)=="integer"){
     $errorcode=$sql;
-    showui($errorcode);
+    showui($errorcode,$responsemimetype);
     //goto view;
     exit();
 }else{
@@ -127,49 +129,49 @@ if(gettype($sql)=="integer"){
     $mysql->query();
     //获取mysql的执行错误代码
     $errorcode=$mysql->get_error();
-    showui($errorcode);
+    showui($errorcode,$responsemimetype);
     exit();
 }
 
 
 //其它未知错误
 $errorcode=8;
-showui($errorcode);
+showui($errorcode,$responsemimetype);
 
 //当检查到错误代码出现时，直接程序直接跳转到这里
+//新增ajax, 要求IE10+(包含)
 //执行结果展示
 //PHP5.2以上版本
-function showui($errorcode){
-    $cachefile=MSGROOT."caches/caches_".$lang."_".$errorcode.".html";//缓存文件的存放地址
+function showui($errorcode,$mimetype="html"){
     global $userlang,$timer,$sysconf;
-    //如果系统开启缓存,则直接显示缓存文件
-    if(file_exists($cachefile)&&(time()-filemtime($cachefile))<$sysconf->cachetime){
-        echo file_get_contents($cachefile);
-    }else{
-        //如果系统没有开启缓存
-        //根据错误代码获取提示语言
-        $userlang->prompt($errorcode);
-        //提示标题
-        $title=$userlang->notice['title'];
-        //提示内容
-        $body=$userlang->notice['body'];
-        //程序执行时间
-        $exetime=$timer->spend();					
-        //开始实例化模板并显示
+
+    //获取相关提示语言
+    $userlang->prompt($errorcode);
+    //提示标题
+    $title=$userlang->notice['title'];
+    //提示内容
+    $body=$userlang->notice['body'];
+    //程序执行时间
+    $exetime=$timer->spend();
+
+    if($mimetype=="json"){
+        header("Content-Type:application/json");
+        if($_SERVER["HTTP_ORIGIN"]){
+            header("Access-Control-Allow-Origin: ".$_SERVER["HTTP_ORIGIN"]);
+        }else{
+            header("Access-Control-Allow-Origin: *");
+        }
+        header("Access-Control-Allow-Credentials: true");
+        //header("Access-Control-Expose-Headers: true");
+        printf("{code:'%d',title:'%s',body:'%s',exetime:'%s'}",$errorcode,$title,$body,$exetime);
+    }else if($mimetype=="html"){
+        //实例化模板并显示
         $myview=new Template($sysconf->tpldir);
         $myview->assign("lang",$lang);
         $myview->assign("title",$title);
         $myview->assign("body",$body);
         $myview->assign("tempurl","/templates/".$sysconf->tpldir);
         $myview->assign("exetime",$exetime);
-        //获取最终输出结果并缓存起来
-        ob_start();
         $myview->display();
-        $submit_result=ob_get_contents();//提交结果
-        ob_flush();
-        if($sysconf->cachetime>0){
-            file_put_contents($cachefile,$submit_result);
-        }
     }
 }
-?>
