@@ -156,6 +156,7 @@ function showui($errorcode,$mimetype="html"){
 
     if($mimetype=="json"){
         header("Content-Type:application/json");
+        header("Access-Control-Allow-Methods:POST,GET");
         if($_SERVER["HTTP_ORIGIN"]){
             header("Access-Control-Allow-Origin: ".$_SERVER["HTTP_ORIGIN"]);
         }else{
@@ -163,7 +164,7 @@ function showui($errorcode,$mimetype="html"){
         }
         header("Access-Control-Allow-Credentials: true");
         //header("Access-Control-Expose-Headers: true");
-        printf("{code:'%d',title:'%s',body:'%s',exetime:'%s'}",$errorcode,$title,$body,$exetime);
+        printf("{'code':'%d','title':'%s','body':'%s','exetime':'%s'}",$errorcode,$title,$body,$exetime);
     }else if($mimetype=="html"){
         //实例化模板并显示
         $myview=new Template($sysconf->tpldir);
