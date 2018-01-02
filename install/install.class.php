@@ -36,12 +36,18 @@ class Install{
 
 			//创建数据库
 			$sql=trim(file_get_contents(MSGROOT."install/install.sql"));
+			
 			$sql_arr=explode("Create table ims_",$sql);
+			
+
 			array_shift($sql_arr);
+			
 			require(MSGROOT."include/db.class.php");
 			$mysql=new Mysql($host,$user,$passwd,$database,$prefix);
+			
 			foreach($sql_arr as $sql){
 				$sql="Create table ims_".$sql;
+				
 				$mysql->setQuery($sql);
 				$mysql->query();
 			}
@@ -59,10 +65,10 @@ class Install{
 			}else{
 				echo "系统安装成功,正在转向管理后台!";
 				//写入安装锁定文件
-				file_put_contents(MSGROOT."install/install.lock","If you want to reinstall the system,please remove this file!");
+				//file_put_contents(MSGROOT."install/install.lock","If you want to reinstall the system,please remove this file!");
 				//写入新的配置文件
-				file_put_contents(MSGROOT."config.php",$conffile);
-				echo "<script>setTimeout(function(){window.location.href=\"../admin_safe_ims/\";},1500);</script>";
+				//file_put_contents(MSGROOT."config.php",$conffile);
+				//echo "<script>setTimeout(function(){window.location.href=\"../admin_safe_ims/\";},1500);</script>";
 			}
 		}
 	}

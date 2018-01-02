@@ -225,7 +225,7 @@ class Msg{
 		//更新消息状态，标记为相应的状态
 		$mysql->setQuery("update ims_message set msg_status=\"$action\",deal_person=\"$deal_person\",deal_time=now() where id=$id");
 		$mysql->query();
-		if(mysql_error()){
+		if(mysqli_error()){
 			return "未知错误，处理失败!";
 		}else{
 			global $accesslog;

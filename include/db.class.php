@@ -45,10 +45,14 @@ class Mysql extends DB{
 		$this->dbname=$name;
 
 		//连接数据库
-		$this->connect=mysql_connect($host,$user,$password);
+		$this->connect=mysqli_connect($host,$user,$password);
 		if($this->connect){
-			mysql_query("set names $code",$this->connect);
-			mysql_select_db($name,$this->connect);
+			
+			if(!mysqli_query($this->connect,"SELECT * FROM information_schema.SCHEMATA where SCHEMA_NAME=$name;")){
+				mysqli_query($this->connect,"CREATE DATABASE `$name`;");
+			}
+			mysqli_query($this->connect,"set names $code");
+			mysqli_select_db($this->connect,$name);
 		}else{
 			$this->errorcode=7;
 		}
@@ -62,8 +66,8 @@ class Mysql extends DB{
 
 	//执行不需要结果的sql:insert update
 	public function query(){
-		mysql_query($this->queryString,$this->connect);
-		if(mysql_error()){
+		mysqli_query($this->connect,$this->queryString);
+		if(mysqli_error($this->connect)){
 			$this->errorcode=7;
 		}
 	}
@@ -82,9 +86,9 @@ class Mysql extends DB{
 
 	//获取一行记录,返回数组
 	public function getOne(){
-		$re=mysql_query($this->queryString,$this->connect);
-		$res=mysql_fetch_row($re);
-		if(mysql_error()){
+		$re=mysqli_query($this->connect,$this->queryString);
+		$res=mysqli_fetch_row($re);
+		if(mysqli_error()){
 			$this->errorcode=7;
 			return;
 		}else{
@@ -94,9 +98,9 @@ class Mysql extends DB{
 
 	//获取多行记录，返回二维数组
 	public function getRows(){
-		$re=mysql_query($this->queryString,$this->connect);
+		$re=mysqli_query($this->connect,$this->queryString);
 		$res=array();
-		while($a=mysql_fetch_assoc($re)){
+		while($a=mysqli_fetch_assoc($re)){
 			$res[]=$a;
 		}
 		if(empty($res)){
@@ -108,7 +112,7 @@ class Mysql extends DB{
 
 	public function __destruct(){
 		if($this->connect){
-			mysql_close($this->connect);
+			mysqli_close($this->connect);
 		}
 	}
 }
