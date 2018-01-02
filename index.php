@@ -16,6 +16,6 @@ if(!file_exists("./config.php")){
 	header("Location:./install/");
 	exit();
 }else{
-	header("HTTP/1.1 404 Not Found");
+	header("Location:./admin_safe_ims/");
 }
 ?>

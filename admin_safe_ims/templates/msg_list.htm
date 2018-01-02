@@ -89,7 +89,8 @@ $.ready(function(){
 <div class="msg_admin">
 <div class="title"><a href="javascript:window.top.location.reload()">首页</a> &gt; 信息管理</div>
 <div class="query">
-<form action="" method="get">
+<form action="msg_list.php" method="get">
+	<input type="text" name="telephoneNum" placeholder="输入手机号码查询"style="width: 120px;cursor: inherit;background-color:#fff;">
 	<select name="query">
 		<option selected="selected">请选择</option>
 		<option value="no_deal">未处理</option>
@@ -100,6 +101,7 @@ $.ready(function(){
 		<option value="all">所有记录</option>
 	</select>
 	<input type="submit" value="查询"/>
+</form>
 </div>
 <table class="msg_list">
 <tr><td><input type="checkbox" value="0" onclick="selectall()"/></td><td>ID</td><td>客户姓名</td><td>客户邮箱</td><td>国家</td><td>产品</td><td>提交时间</td><td>分组</td><td>状态</td></tr>
