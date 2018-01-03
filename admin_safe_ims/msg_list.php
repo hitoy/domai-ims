@@ -73,6 +73,9 @@ $smarty->assign("templateurl",$templateurl);
 $smarty->assign("msg_list",$msg_list);
 $smarty->assign("pageinfo",$pageinfo);
 $smarty->assign("ulv",$ulv);
+$smarty->assign("keywords",isset($_GET["telephoneNum"])?$_GET["telephoneNum"]:"");
+$smarty->assign("category",isset($_GET["query"])?$_GET["query"]:"");
 $smarty->display("msg_list.htm");
+
 
 ?>

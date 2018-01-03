@@ -89,16 +89,16 @@ $.ready(function(){
 <div class="msg_admin">
 <div class="title"><a href="javascript:window.top.location.reload()">首页</a> &gt; 信息管理</div>
 <div class="query">
-<form action="msg_list.php" method="get">
-	<input type="text" name="telephoneNum" placeholder="输入手机号码查询"style="width: 120px;cursor: inherit;background-color:#fff;">
+<form action="" method="get">
+	<input type="text" name="telephoneNum" placeholder="输入手机号码查询"style="width: 120px;cursor: inherit;background-color:#fff;height: 22px;width: 200px;" value="{$keywords}">
 	<select name="query">
-		<option selected="selected">请选择</option>
-		<option value="no_deal">未处理</option>
-		<option value="dealed">已处理</option>
-		<option value="right">有效信息</option>
-		<option value="wrong">无效信息</option>
-		<option value="repeat">重复信息</option>
-		<option value="all">所有记录</option>
+		<option>请选择</option>
+		<option {if $category eq 'no_deal'}selected{/if} value="no_deal">未处理</option>
+		<option {if $category eq 'dealed'}selected{/if} value="dealed">已处理</option>
+		<option {if $category eq 'right'}selected{/if} value="right">有效信息</option>
+		<option {if $category eq 'wrong'}selected{/if} value="wrong">无效信息</option>
+		<option {if $category eq 'repeat'}selected{/if} value="repeat">重复信息</option>
+		<option {if $category eq 'all'}selected{/if} value="all">所有记录</option>
 	</select>
 	<input type="submit" value="查询"/>
 </form>

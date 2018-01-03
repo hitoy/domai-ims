@@ -62,7 +62,7 @@ class Msg{
 
 	public function gettotalsize(){
 		global $mysql;
-		$mysql->setQuery("select count(id) from ims_message where $this->filter and tel like ".$this->telephoneNum);
+		$mysql->setQuery("select count(id) from ims_message where ( $this->filter ) and tel like ".$this->telephoneNum);
         $totalsize=$mysql->getOne();
 		$this->totalsize=$totalsize[0];
 		return $this->totalsize;
@@ -73,8 +73,7 @@ class Msg{
 		$this->currentpage=$page;//当前显示的页面序列
 		$keys=implode(",",$key);
 		$page=$page-1;
-		$sql="select $keys from ims_message where $this->filter and tel like ".$this->telephoneNum." order by id DESC limit ".$page*$this->pagesize.", ".$this->pagesize;
-
+		$sql="select $keys from ims_message where ( $this->filter ) and tel like ".$this->telephoneNum." order by id DESC limit ".$page*$this->pagesize.", ".$this->pagesize;
 		global $mysql;
 		$mysql->setQuery($sql);
 		return $mysql->getRows();
