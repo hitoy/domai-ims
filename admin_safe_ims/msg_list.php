@@ -20,7 +20,8 @@ $ulv=$_SESSION["ulv"];
 
 
 //获取需要进行筛分的参数
-$telephoneNum=isset($_GET["telephoneNum"])?"'%".$_GET["telephoneNum"]."%'":"'%%'";
+
+$telephoneNum=isset($_GET["telephoneNum"]) ?"'%".$_GET["telephoneNum"]."%'":"'%%'" ;
 $category=isset($_GET["query"])?$_GET["query"]:"all";//信息分类
 $page=isset($_GET["page"])?$_GET["page"]:1;//显示第几页的信息
 $pagesize=isset($_COOKIE["listsize"])?$_COOKIE["listsize"]:30;//每页显示的信息数量
