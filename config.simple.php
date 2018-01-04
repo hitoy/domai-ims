@@ -14,12 +14,12 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 //数据库配置
-$cfg["dbhost"]="localhost";
-$cfg["dbuser"]="root";
-$cfg["dbpassword"]="root";
-$cfg["dbname"]="domai_ims";
-$cfg["prefix"]="ims_";
-$cfg["lang"]="utf8";
+$cfg["dbhost"]="";
+$cfg["dbuser"]="";
+$cfg["dbpassword"]="";
+$cfg["dbname"]="";
+$cfg["prefix"]="";
+$cfg["lang"]="";
 
 /*****************************************
  * 多语言配置*****************************
