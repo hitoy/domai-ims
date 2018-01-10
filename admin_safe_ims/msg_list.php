@@ -20,13 +20,15 @@ $ulv=$_SESSION["ulv"];
 
 
 //获取需要进行筛分的参数
+
+$telephoneNum=isset($_GET["telephoneNum"]) ?"'%".(int)$_GET["telephoneNum"]."%'":"'%%'" ;
 $category=isset($_GET["query"])?$_GET["query"]:"all";//信息分类
 $page=isset($_GET["page"])?$_GET["page"]:1;//显示第几页的信息
 $pagesize=isset($_COOKIE["listsize"])?$_COOKIE["listsize"]:30;//每页显示的信息数量
 
 //加载信息类
 require_once("./msg.class.php");
-$msg=new Msg($category,$pagesize);
+$msg=new Msg($telephoneNum,$category,$pagesize);
 //信息列表
 $list=$msg->getlist(array("id","name","email","country","product","subtime","team","msg_status"),$page);
 //对信息列表中消息状态的数字进行转换
@@ -72,6 +74,9 @@ $smarty->assign("templateurl",$templateurl);
 $smarty->assign("msg_list",$msg_list);
 $smarty->assign("pageinfo",$pageinfo);
 $smarty->assign("ulv",$ulv);
+$smarty->assign("keywords",isset($_GET["telephoneNum"])?$_GET["telephoneNum"]:"");
+$smarty->assign("category",isset($_GET["query"])?$_GET["query"]:"");
 $smarty->display("msg_list.htm");
+
 
 ?>

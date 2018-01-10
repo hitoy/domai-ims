@@ -14,7 +14,8 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 class Msg{
-
+	//电话号码
+	private $telephoneNum;
 	//--消息类别， 0表示未处理，1表示有效，2表示重复，3表示无效, 9表示已经被删除--
 	private $category;
 	private $filter;
@@ -27,7 +28,9 @@ class Msg{
 	//当前页面书
 	private $currentpage;
 
-	public function __construct($category="all",$pagesize=30){
+
+	public function __construct($telephoneNum="'%%'",$category="all",$pagesize=30){
+		$this->telephoneNum = $telephoneNum; 
 		$this->category=$category;
 		switch ($category)
 		{
@@ -59,7 +62,7 @@ class Msg{
 
 	public function gettotalsize(){
 		global $mysql;
-		$mysql->setQuery("select count(id) from ims_message where $this->filter");
+		$mysql->setQuery("select count(id) from ims_message where ( $this->filter ) and tel like ".$this->telephoneNum);
         $totalsize=$mysql->getOne();
 		$this->totalsize=$totalsize[0];
 		return $this->totalsize;
@@ -70,7 +73,7 @@ class Msg{
 		$this->currentpage=$page;//当前显示的页面序列
 		$keys=implode(",",$key);
 		$page=$page-1;
-		$sql="select $keys from ims_message where $this->filter order by id DESC limit ".$page*$this->pagesize.", ".$this->pagesize;
+		$sql="select $keys from ims_message where ( $this->filter ) and tel like ".$this->telephoneNum." order by id DESC limit ".$page*$this->pagesize.", ".$this->pagesize;
 		global $mysql;
 		$mysql->setQuery($sql);
 		return $mysql->getRows();
@@ -87,13 +90,13 @@ class Msg{
 		$nextpage=$this->currentpage+1;
 		$prepage=$this->currentpage-1;
 
-		$homepage=($this->currentpage==1)?"首页":"<a href=\"?query=$this->category&page=1\">首页</a>";
+		$homepage=($this->currentpage==1)?"首页":"<a href=\"?query=$this->category&page=1&telephoneNum=".$_GET['telephoneNum']."\">首页</a>";
 		//当前页面不是最后一页的情况，都需要显示下一页
-		$homepage=($this->currentpage==$pagecount)?$homepage." 下一页 ":$homepage." <a href=\"?query=$this->category&page=$nextpage\">下一页</a> ";
+		$homepage=($this->currentpage==$pagecount)?$homepage." 下一页 ":$homepage." <a href=\"?query=$this->category&page=$nextpage&telephoneNum=".$_GET['telephoneNum']."\" >下一页</a> ";
 
-		$lastpage=($this->currentpage==$pagecount)?"尾页":"<a href=\"?query=$this->category&page=$pagecount\">尾页</a>";
+		$lastpage=($this->currentpage==$pagecount)?"尾页":"<a href=\"?query=$this->category&page=$pagecount&telephoneNum=".$_GET['telephoneNum']."\">尾页</a>";
 		//当尾页不是第一页的情况下，都需要显示上一页
-		$lastpage=($this->currentpage==1)?"上一页 ".$lastpage:"<a href=\"?query=$this->category&page=$prepage\">上一页</a> ".$lastpage;
+		$lastpage=($this->currentpage==1)?"上一页 ".$lastpage:"<a href=\"?query=$this->category&page=$prepage&telephoneNum=".$_GET['telephoneNum']."\">上一页</a> ".$lastpage;
 
 
 		//下拉框翻页的处理
@@ -104,7 +107,7 @@ class Msg{
 			}else{
 				$selected="";
 			}
-			$pagen.="<option value=\"?query=$this->category&page=$i\"".$selected.">第".$i."页</option>";
+			$pagen.="<option value=\"?query=$this->category&page=$i&telephoneNum=".$_GET['telephoneNum']."\"".$selected.">第".$i."页</option>";
 		}
 		$pageinfo=$pageinfo.$homepage.$lastpage.$pagen."</select>";
 		return $pageinfo;
@@ -225,7 +228,7 @@ class Msg{
 		//更新消息状态，标记为相应的状态
 		$mysql->setQuery("update ims_message set msg_status=\"$action\",deal_person=\"$deal_person\",deal_time=now() where id=$id");
 		$mysql->query();
-		if(mysql_error()){
+		if(mysqli_error()){
 			return "未知错误，处理失败!";
 		}else{
 			global $accesslog;
